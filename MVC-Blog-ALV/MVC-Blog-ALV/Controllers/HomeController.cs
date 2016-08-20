@@ -1,6 +1,7 @@
 ﻿using MVC_Blog_ALV.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,7 +14,9 @@ namespace MVC_Blog_ALV.Controllers
         {
 
             var db = new ApplicationDbContext();
-            var post = db.Posts.OrderByDescending(p => p.Date).Take(3);
+            var post = db.Posts.Include(p => p.Author)
+                               .OrderByDescending(p => p.Date)
+                               .Take(3);
             return View(post.ToList());
         }
     }

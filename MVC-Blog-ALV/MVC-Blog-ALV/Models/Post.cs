@@ -26,7 +26,7 @@ namespace MVC_Blog_ALV.Models
         [Required]
         public DateTime Date { get; set; }
 
-
+        [Required]
         public ApplicationUser Author { get; set; }
         
 

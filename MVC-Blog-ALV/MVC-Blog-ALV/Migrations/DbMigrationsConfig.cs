@@ -1,5 +1,8 @@
 namespace MVC_Blog_ALV.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -29,5 +32,46 @@ namespace MVC_Blog_ALV.Migrations
             //    );
             //
         }
+
+        private void CreateUser(ApplicationDbContext context,
+            string email, string password, string fullName)
+        {
+            var userManager = new UserManager<ApplicationUser>(
+                new UserStore<ApplicationUser>(context));
+            userManager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 1,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireUppercase = false,
+            };
+
+            var user = new ApplicationUser
+            {
+                UserName = email,
+                Email = email,
+                FullName = fullName
+            };
+
+            var userCreateResult = userManager.Create(user, password);
+            if (!userCreateResult.Succeeded)
+            {
+                throw new Exception(string.Join("; ", userCreateResult.Errors));
+            }
+        }
+
+        private void CreatePost(ApplicationDbContext context,
+    string title, string body, DateTime date, string authorUsername)
+        {
+            var post = new Post();
+            post.Title = title;
+            post.Body = body;
+            post.Date = date;
+            post.Author = context.Users.Where(u => u.UserName == authorUsername).FirstOrDefault();
+            context.Posts.Add(post);
+        }
+
+
     }
 }
