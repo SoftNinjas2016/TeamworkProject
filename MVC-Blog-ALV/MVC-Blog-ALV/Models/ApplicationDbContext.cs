@@ -10,8 +10,9 @@ namespace MVC_Blog_ALV.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
 
-        public DbSet<Post> Posts { get; set; }
-        public DbSet<Comment> Comments { get; set; }
+        public IDbSet<Post> Posts { get; set; }
+        public IDbSet<Event> Events { get; set; }
+        public IDbSet<Comment> Comments { get; set; }
 
 
         public ApplicationDbContext()

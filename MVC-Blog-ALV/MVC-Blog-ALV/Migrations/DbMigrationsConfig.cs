@@ -5,9 +5,9 @@ namespace MVC_Blog_ALV.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<MVC_Blog_ALV.Models.ApplicationDbContext>
+    public sealed class DbMigrationsConfig : DbMigrationsConfiguration<MVC_Blog_ALV.Models.ApplicationDbContext>
     {
-        public Configuration()
+        public DbMigrationsConfig()
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
