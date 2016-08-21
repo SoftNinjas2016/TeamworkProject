@@ -52,7 +52,7 @@ namespace MVC_Blog_ALV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title,Body")] Post post)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 post.Author = db.Users.FirstOrDefault(u =>u.UserName ==User.Identity.Name);
                 db.Posts.Add(post);
@@ -85,7 +85,7 @@ namespace MVC_Blog_ALV.Controllers
         [HttpPost]
         [Authorize(Roles ="Administrator")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Body,Date,Author_Id")] Post post)
+        public ActionResult Edit([Bind(Include = "Id,Title,Body,Author_Id")] Post post)
         {
             if (ModelState.IsValid)
             {
