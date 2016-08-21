@@ -41,7 +41,7 @@ namespace MVC_Blog_ALV.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            return View();
+            return View();  
         }
 
         // POST: Posts/Create
@@ -85,7 +85,7 @@ namespace MVC_Blog_ALV.Controllers
         [HttpPost]
         [Authorize(Roles ="Administrator")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Body,Date")] Post post)
+        public ActionResult Edit([Bind(Include = "Id,Title,Body,Date,Author_Id")] Post post)
         {
             if (ModelState.IsValid)
             {

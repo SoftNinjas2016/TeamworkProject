@@ -17,6 +17,13 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
+        <select name="Author_Id">
+            @foreach (var author in ViewBag.Authors)
+            {
+                <option value="@author.Id">@author.UserName</option>
+            }
+        </select>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
