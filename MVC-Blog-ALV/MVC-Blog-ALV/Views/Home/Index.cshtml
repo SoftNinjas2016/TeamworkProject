@@ -2,6 +2,7 @@
 
 @model List<MVC_Blog_ALV.Models.Post>
 <h1>Your last posts</h1>
+
 <section class="row">
 
     @foreach (var post in Model)
@@ -15,8 +16,18 @@
                 @:by <i>@post.Author.FullName (@post.Author.UserName)</i>
             }
              at <b>@post.Date</b></div>
-            <div class="body">@Html.Raw(post.Body)</div>
+            <div class="body">
+                @Html.Raw(post.Body.Length > 160 ? post.Body.ToString().Substring(0, 160) + " ..." : post.Body)
+            </div>
+            <div id="post-details-@post.Id">
+                @Ajax.ActionLink("View Details >>", "PostDetailsById", "Home",
+                    new {id = post.Id},
+                    new AjaxOptions
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "post-details-" + post.Id
+                    }, new {@class = "btn btn-default"})
+            </div>            
         </article>
     }
-
 </section>
