@@ -12,7 +12,6 @@ namespace MVC_Blog_ALV.Models
         {
             this.IsPublic = true;
             this.StartDateTime = true;
-            this.Comments = new HashSet<Comment>();
         }
 
         public int Id { get; set; }
@@ -35,6 +34,5 @@ namespace MVC_Blog_ALV.Models
 
         [MaxLength(200)]
         public string Location { get; set; }
-        public HashSet<Comment> Comments { get; private set; }
     }
 }

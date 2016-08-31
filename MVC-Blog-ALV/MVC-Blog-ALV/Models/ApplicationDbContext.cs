@@ -12,7 +12,7 @@ namespace MVC_Blog_ALV.Models
 
         public IDbSet<Post> Posts { get; set; }
         public IDbSet<Event> Events { get; set; }
-        public IDbSet<Comment> Comments { get; set; }
+//        public IDbSet<Comment> Comments { get; set; }
 
 
         public ApplicationDbContext()
