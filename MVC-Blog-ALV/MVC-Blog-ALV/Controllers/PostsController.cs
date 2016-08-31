@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using MVC_Blog_ALV.Extensions;
 using MVC_Blog_ALV.Models;
 
 namespace MVC_Blog_ALV.Controllers
@@ -57,6 +58,7 @@ namespace MVC_Blog_ALV.Controllers
                 post.Author = db.Users.FirstOrDefault(u =>u.UserName ==User.Identity.Name);
                 db.Posts.Add(post);
                 db.SaveChanges();
+                this.AddNotification("Blog post created!", NotificationType.SUCCESS);
                 return RedirectToAction("Index");
             }
 
@@ -69,13 +71,17 @@ namespace MVC_Blog_ALV.Controllers
         {
             if (id == null)
             {
+                this.AddNotification("Invalid blog post id", NotificationType.ERROR);
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Post post = db.Posts.Find(id);
             if (post == null)
             {
+                this.AddNotification("Blog post not found", NotificationType.ERROR);
                 return HttpNotFound();
             }
+            
             return View(post);
         }
 
@@ -91,6 +97,7 @@ namespace MVC_Blog_ALV.Controllers
             {
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
+                this.AddNotification("Blog post saved!", NotificationType.SUCCESS);
                 return RedirectToAction("Index");
             }
             return View(post);
@@ -102,6 +109,7 @@ namespace MVC_Blog_ALV.Controllers
         {
             if (id == null)
             {
+                this.AddNotification("Invalid blog post id", NotificationType.ERROR);
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Post post = db.Posts.Find(id);
@@ -121,6 +129,7 @@ namespace MVC_Blog_ALV.Controllers
             Post post = db.Posts.Find(id);
             db.Posts.Remove(post);
             db.SaveChanges();
+            this.AddNotification("Blog post deleted!", NotificationType.SUCCESS);
             return RedirectToAction("Index");
         }
 

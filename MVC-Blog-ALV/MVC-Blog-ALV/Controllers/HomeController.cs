@@ -19,5 +19,16 @@ namespace MVC_Blog_ALV.Controllers
                                .Take(3);
             return View(post.ToList());
         }
+
+        public ActionResult PostDetailsById(int id)
+        {
+            var db = new ApplicationDbContext();
+            var postDetails = db.Posts
+                .Where(p => p.Id == id)
+                .Select(PostDetailsViewModel.ViewModel)
+                .FirstOrDefault();
+
+            return this.PartialView("_PostDetails", postDetails);
+        }
     }
 }
