@@ -26,6 +26,9 @@ namespace MVC_Blog_ALV
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ajax").Include(
+                      "~/Scripts/jquery.unobtrusive-ajax.min.js"));
         }
     }
 }
