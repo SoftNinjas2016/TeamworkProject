@@ -1,9 +1,9 @@
 ﻿@model MVC_Blog_ALV.Models.PostDetailsViewModel
 
 <div>
-    <dl class="dl-horizontal">       
+    <dl class="dl-horizontal post">       
         <dd>
-            <h2>@Html.DisplayFor(model => model.Title)</h2> (@Html.DisplayFor(model => model.Date))
+            <h2 class="title">@Html.DisplayFor(model => model.Title)</h2> (@Html.DisplayFor(model => model.Date))
         </dd>
         <hr />
         <dd>

@@ -1,33 +1,50 @@
 ﻿@{ ViewBag.Title = "Home Page";}
 
 @model List<MVC_Blog_ALV.Models.Post>
-<h1>Your last posts</h1>
+@if (Model.Count == 0)
+{
+    <h1>Welcome to our Car Blog </h1>
+    <div>
+        <img src="~/images/audi.png" />
+        <img src="~/images/cars.jpg" />
+        <img src="~/images/manycars.jpg" />
+        <img src="~/images/mercedes.png" />
+        <img src="~/images/m4.jpg" />
+        <img src="~/images/lexus.png" />
+        <img src="~/images/rols.png" />
+    </div>
+}
+else
+{
+    <h1>Your last posts</h1>
 
-<section class="row">
+    <section class="row">
 
-    @foreach (var post in Model)
-    {
-        <article class="post col-md-6">
-            <h2 class="title">@post.Title</h2>
-            <div class="about">
-                Posted 
-            @if (post.Author !=null)
-            {
-                @:by <i>@post.Author.FullName (@post.Author.UserName)</i>
-            }
-             at <b>@post.Date</b></div>
-            <div class="body">
-                @Html.Raw(post.Body.Length > 160 ? post.Body.ToString().Substring(0, 160) + " ..." : post.Body)
-            </div>
-            <div id="post-details-@post.Id">
-                @Ajax.ActionLink("View Details >>", "PostDetailsById", "Home",
-                    new {id = post.Id},
-                    new AjaxOptions
+        @foreach (var post in Model)
+        {
+            <article class="post col-md-6">
+                <h2 class="title">@post.Title</h2>
+                <div class="about">
+                    Posted
+                    @if (post.Author != null)
                     {
-                        InsertionMode = InsertionMode.Replace,
-                        UpdateTargetId = "post-details-" + post.Id
-                    }, new {@class = "btn btn-default"})
-            </div>            
-        </article>
-    }
-</section>
+                        @:by <i>@post.Author.FullName (@post.Author.UserName)</i>
+            }
+                    at <b>@post.Date</b>
+                </div>
+                <div class="body">
+                    @Html.Raw(post.Body.Length > 160 ? post.Body.ToString().Substring(0, 160) + " ..." : post.Body)
+                </div>
+                <div id="post-details-@post.Id">
+                    @Ajax.ActionLink("View Details >>", "PostDetailsById", "Home",
+                     new { id = post.Id },
+                     new AjaxOptions
+                     {
+                         InsertionMode = InsertionMode.Replace,
+                         UpdateTargetId = "post-details-" + post.Id
+                     }, new { @class = "btn btn-default" })
+                </div>
+            </article>
+        }
+    </section>
+}
