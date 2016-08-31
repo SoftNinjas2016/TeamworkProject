@@ -22,7 +22,7 @@ select,
 textarea {
     max-width: 280px;
 }
-.post>h2, .post>div, .post>dl{
+.post>h2, .post>div{
     background: #EEE;
     padding: 10px;
     margin:0;
@@ -37,4 +37,9 @@ textarea {
 img{
     width: 200px;
     height: 150px;
+    margin: 10px;
+    padding: 10px;
+}
+.detail-post{
+    background:#EEE;
 }

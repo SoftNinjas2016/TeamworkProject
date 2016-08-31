@@ -91,7 +91,7 @@ namespace MVC_Blog_ALV.Controllers
         [HttpPost]
         [Authorize(Roles ="Administrator")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Body,Author_Id")] Post post)
+        public ActionResult Edit([Bind(Include = "Id,Title,Body,Author,Author_Id")] Post post)
         {
             if (ModelState.IsValid)
             {
